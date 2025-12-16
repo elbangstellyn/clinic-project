@@ -1,0 +1,141 @@
+{% extends 'clinic/base.html' %}
+{% block content %}
+
+<div class="home-container">
+    <section class="welcome-section">
+        <h1>Welcome to Our Clinic</h1>
+        <p>
+            We are a trusted healthcare provider offering quality drugs, 
+            vaccination services, and professional medical advice.
+            Our mission is to promote healthy living and accessible care for all.
+        </p>
+        <div class="cta-buttons">
+            <a href="{% url 'drug_list' %}" class="btn">Browse Medications</a>
+            <a href="{% url 'book_injection' %}" class="btn">Book an Injection</a>
+        </div>
+    </section>
+
+    <section class="tips-section">
+        <h2>Healthy Living Tips</h2>
+        <ul class="tips-list">
+            {% for tip in healthy_tips %}
+                <li>{{ tip }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="contact-info">
+        <h2>Visit Us</h2>
+        <p><strong>Address:</strong> kurudu estate, Abuja</p>
+        <p><strong>Phone:</strong> 09036739382</p>
+        <p><strong>Email:</strong> blessing@gmail.com</p>
+    </section>
+</div>
+
+<style>
+.home-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: #1d1b1b;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.welcome-section h1 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.cta-buttons {
+    margin-top: 20px;
+}
+
+.cta-buttons .btn {
+    margin: 0 10px;
+    min-width: 160px;
+}
+
+.tips-section {
+    margin-bottom: 30px;
+    {% comment %} text-align: center; {% endcomment %}
+}
+
+.tips-section h2 {
+    color: #28a745;
+    margin-bottom: 15px;
+}
+
+.tips-list {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.tips-list li {
+    margin-bottom: 8px;
+}
+
+.contact-info {
+    background: #3f644fff;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+.contact-info h2 {
+    margin-top: 0;
+    color: #155724;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cta-buttons .btn {
+        margin: 5px 0;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .welcome-section {
+        background: #2d2d2d;
+        color: #e0e0e0;
+    }
+
+    .contact-info {
+        background: #1e3a2a;
+        color: #b9f6ca;
+        border-left-color: #69f0ae;
+    }
+
+    .contact-info h2 {
+        color: #69f0ae;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .welcome-section{
+        border: 1px solid white;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section{
+        border: 1px solid white;
+    }
+}
+</style>
+
+{% endblock %}

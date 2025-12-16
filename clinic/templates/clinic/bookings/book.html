@@ -1,0 +1,182 @@
+{% extends 'clinic/base.html' %}
+{% block content %}
+
+<div class="booking-container">
+    <h2>Book an Injection</h2>
+
+    <form method="post" class="booking-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.injection_category.id_for_label }}">Injection Type</label>
+            {{ form.injection_category }}
+            {% if form.injection_category.errors %}
+                <div class="error">{{ form.injection_category.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.patient_name.id_for_label }}">Full Name</label>
+            {{ form.patient_name }}
+            {% if form.patient_name.errors %}
+                <div class="error">{{ form.patient_name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+            {{ form.phone }}
+            {% if form.phone.errors %}
+                <div class="error">{{ form.phone.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.date.id_for_label }}">Date</label>
+            {{ form.date }}
+            {% if form.date.errors %}
+                <div class="error">{{ form.date.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.start_time.id_for_label }}">Time Slot</label>
+            {{ form.start_time }}
+            {% if form.start_time.errors %}
+                <div class="error">{{ form.start_time.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn submit-btn">Confirm Booking</button>
+    </form>
+</div>
+
+<style>
+    .booking-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #1d1b1b;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .booking-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+    }
+
+    .error {
+        color: #dc3545;
+        font-size: 0.9rem;
+        margin-top: 4px;
+    }
+
+    .submit-btn {
+        background: #007bff;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+        background: #0056b3;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 600px) {
+        .booking-container {
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        .submit-btn {
+            padding: 14px;
+            font-size: 1.1rem;
+        }
+    }
+
+     @media (max-width: 768px){
+            .booking-container{
+                border: 1px solid white;
+            }
+        }
+
+    @media (max-width: 480px){
+            .booking-container{
+                border: 1px solid white;
+            }
+        }
+
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {
+        .booking-container {
+            background: #1e1e1e;
+            color: #e0e0e0;
+            box-shadow: 0 2px 10px rgba(255,255,255,0.05);
+        }
+
+        .form-group label {
+            color: #e0e0e0;
+        }
+
+        .form-group input,
+        .form-group select {
+            background: #2d2d2d;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .submit-btn {
+            background: #64b5f6;
+            color: #121212;
+        }
+
+        .submit-btn:hover {
+            background: #4da1db;
+        }
+
+   
+    }
+</style>
+
+{% endblock %}

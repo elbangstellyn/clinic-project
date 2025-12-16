@@ -1,0 +1,43 @@
+<!-- templates/clinic/order_history.html -->
+{% extends 'clinic/base.html' %}
+
+{% block content %}
+
+<style>
+    .checkout-container{
+        border: 1px solid white;
+        padding: .5rem;
+        border-radius: .5rem;
+    }
+</style>
+<div class="checkout-container">
+    <h2>My Order History</h2>
+
+    {% if orders %}
+        {% for order in orders %}
+        <div class="cart-item" style="margin-bottom: 20px; background:  #1d1b1bff; color: white; padding: .8rem; border-radius: .5rem;">
+            <div class="item-details" style="width: 100%;">
+                <h3>Order: <strong>{{ order.reference }}</strong></h3>
+                <p><strong>Status:</strong> 
+                    <span style="color: {% if order.status == 'paid' or order.status == 'delivered' %}green{% elif order.status == 'cancelled' %}red{% else %}orange{% endif %};">
+                        {{ order.get_status_display }}
+                    </span>
+                </p>
+                <p><strong>Date:</strong> {{ order.created_at|date:"M d, Y H:i" }}</p>
+                <p><strong>Total:</strong> ₦{{ order.total_amount|floatformat:2 }}</p>
+                <p><strong>Delivery:</strong> {{ order.address }}</p>
+
+                <h4>Items:</h4>
+                <ul style="padding-left: 20px;">
+                    {% for item in order.items.all %}
+                        <li>{{ item.quantity }}x {{ item.drug.name }} — ₦{{ item.price|floatformat:2 }} each</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>You haven't placed any orders yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
